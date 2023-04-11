@@ -47,17 +47,7 @@ incidence <- (cases/population)*10^5
 dates <- seq(as.Date("2015-01-01"), by = "month", along = cases)
 ```
 
-# Introdução
-
-A toxicologia estuda os efeitos prejudiciais de substâncias químicas em organismos.
-Diversos testes de toxicidade podem ser usados avaliar o impacto dessas substâncias nos organismos @timbrell2001.
-Quando se analisa a mortalidade em testes de toxicidade, é comum o cálculo da concentração letal para 50% da população testada, conhecida como CL50.
-Em alguns casos, também é importante determinar outras concentrações, a exemplo da CL10 ou CL90.
-Uma ferramenta estatísitca comumente usada neste tipo de análise é o modelo de regressão de Probit @pacheco2013.
-
-Neste texto, uma análise de Probit será realizada para calcular concentrações letais em linguagem **R**.
-Um conjunto de dados da literatura, disponível com livre acesso na internet, será usado como caso de estudo.
-Para esta aplicação, primeiramente serão apresentados conceitos básicos sobre modelos lineares generalizados e o modelo de Probit, além das distribuições de probabilidade importantes para a análise.
+# Introduction
 
 # Métodos
 
@@ -79,23 +69,6 @@ $$\mu_i=\Phi(\eta_i)=\Phi(\beta_0 + \beta_1X_{1i} + \dots + \beta_kX_{ki} + u)$$
 No modelo Probit, o valor do preditor linear $\eta_i$ é tido como um quantil $z$ da distribuição normal padrão, isto é, $\Phi(z)=P(Z\leq z)$, em que $Z \sim Normal(0,1)$.
 A variável resposta é convertida em uma variável contínua que assume valores reais no intervalo $[0,1]$ por meio da função de ligação.
 Assim, o modelo Probit pode ser pensado como um modelo linear para a transformação da resposta ou como um modelo de regressão não linear para a resposta @chunrong2003.
-
-## Distribuições de Bernoulli e Binomial
-
-Seja $Y_i$ uma variável binária, cujas realizações podem assumir somente dois valores possíveis (sucesso se $Y_i=1$ ou fracasso se $Y_i=0$), pode-se usar a distribuição de Bernoulli para representá-la.
-Então, diz-se que $Y_i\sim Be(p)$ com média $\mu_i=p$, em que $p$ é a probabilidade de sucesso.
-Na distribuição de Bernoulli, o experimento é realizado apenas uma vez.
-No caso em que o experimento seja realizado mais de uma vez, assumindo que as realizações são independentes entre si, pode-se usar a distribuição Binomial.
-Esta distribuição descreve o comportamento dos resultados de um número $n$ de realizações de um experimento com probabilidade de sucesso $p$.
-Neste caso, diz-se que $Y_i\sim Bin(n,p)$ com média $\mu_i=np$ @morettin2017.
-
-Os resultados de testes de concentração letal são a relação de organismos mortos por diferentes concentrações de alguma substância tóxica a qual foram expostos.
-Pode-se representar esta relação por duas variáveis binárias, que indicam respectivamente a morte e a sobrevivência de cada organismo da amostra.
-Por exemplo, para um organismo, tem-se `dead = 1` e `alive = 0` caso haja a morte, e vice-versa.
-Em vez de visualizar o resultado individualmente, uma outra opção é considerar o resultado de todos os organismos, somando-se o total obtido em cada variável.
-Neste caso, o resultado será dado por duas variáveis que indicam respectivamente o total que sobreviveu ou não.
-Por exemplo, em uma amostra formada por 10 organismos, tem-se `dead = 6` e `alive = 4`.
-Assim, as variáveis binárias são convertidas em variáveis de uma distribuição Binomial.
 
 ## Incidence of dengue cases
 
